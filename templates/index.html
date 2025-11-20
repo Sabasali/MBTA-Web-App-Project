@@ -8,7 +8,36 @@
   </head>
 
   <body>
-    <h1>Hi</h1>
+    <h1>Hello beautiful neighbor</h1>
     <p>This is an amazing app to help you find the nearest MBTA station</p>
+    <form method="POST" action="/">
+        <label for="location">Enter a location:</label>
+        <input type="text" id="location" name="place" required>
+        <button type="submit">Find Station</button>
+    </form>
+    
+    {% if stop %}
+    <br>
+    <h2>Nearest MBTA Station to "{{ place }}":</h2>
+
+    <p><strong>Station Name:</strong> {{ stop }}</p>
+    <p><strong>Latitude:</strong> {{ lat }}</p>
+    <p><strong>Longitude:</strong> {{ lon }}</p>
+
+    <p><strong>Wheelchair Accessible:</strong>
+        {% if wheelchair == 1 %}
+            Yes (Accessible)
+        {% elif wheelchair == 2 %}
+            No (Not Accessible)
+        {% else %}
+            Unknown
+        {% endif %}
+
+    </p>
+{% endif %}
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
   </body>
 </html>
